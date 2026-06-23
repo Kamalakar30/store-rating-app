@@ -23,11 +23,9 @@ function Signup() {
 
     const { name, email, address, password } = formData;
 
-    if (name.length < 20 || name.length > 60) {
-      return alert(
-        "Name must be between 20 and 60 characters"
-      );
-    }
+    if (!name.trim()) {
+  return alert("Name is required");
+}
 
     if (address.length > 400) {
       return alert(
