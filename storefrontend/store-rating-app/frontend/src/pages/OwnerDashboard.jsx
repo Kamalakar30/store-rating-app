@@ -20,7 +20,7 @@ function OwnerDashboard() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/ratings/store/1"
+        "https://store-rating-app-lgts.onrender.com/api/ratings/store/1"
       );
 
       setRatingData(res.data);
@@ -34,7 +34,7 @@ function OwnerDashboard() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/stores/1/users"
+        "https://store-rating-app-lgts.onrender.com/api/stores/1/users"
       );
 
       setUsers(res.data);

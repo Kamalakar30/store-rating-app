@@ -35,7 +35,7 @@ function ChangePassword() {
     try {
 
       const res = await axios.put(
-        "http://localhost:5000/api/auth/change-password",
+        "https://store-rating-app-lgts.onrender.com/api/auth/change-password",
         {
           email,
           oldPassword,

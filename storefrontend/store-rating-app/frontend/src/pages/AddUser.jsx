@@ -16,7 +16,7 @@ function AddUser() {
     try {
 
       const res = await axios.post(
-        "http://localhost:5000/api/users/add",
+        "https://store-rating-app-lgts.onrender.com/api/users/add",
         {
           name,
           email,

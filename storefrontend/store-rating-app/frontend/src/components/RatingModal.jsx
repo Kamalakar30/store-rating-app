@@ -12,7 +12,7 @@ function RatingModal({ storeId, storeName }) {
       const userId = 1;
 
       const res = await axios.post(
-        "http://localhost:5000/api/ratings/add",
+        "https://store-rating-app-lgts.onrender.com/api/ratings/add",
         {
           user_id: userId,
           store_id: storeId,

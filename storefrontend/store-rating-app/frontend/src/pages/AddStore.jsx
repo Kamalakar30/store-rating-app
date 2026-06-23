@@ -22,7 +22,7 @@ function AddStore() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/stores/add",
+        "https://store-rating-app-lgts.onrender.com/api/stores/add",
         store
       );
 

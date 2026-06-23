@@ -16,7 +16,7 @@ function UserDetails() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/users"
+        "https://store-rating-app-lgts.onrender.com/api/users"
       );
 
       setUsers(res.data);

@@ -54,7 +54,7 @@ function Signup() {
     try {
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://store-rating-app-lgts.onrender.com/api/auth/signup",
         formData
       );
 
