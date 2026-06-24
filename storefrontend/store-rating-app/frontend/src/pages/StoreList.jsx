@@ -14,20 +14,22 @@ function StoreList() {
   }, []);
 
   const fetchStores = async () => {
-    try {
+  try {
 
-      const res = await axios.get(
-        "http://127.0.0.1:5000/api/stores"
-      );
+    const res = await axios.get(
+      "https://store-rating-app-lgts.onrender.com/api/stores"
+    );
 
-      setStores(res.data);
+    console.log("Stores:", res.data);
 
-    } catch (error) {
+    setStores(res.data);
 
-      console.log(error);
+  } catch (error) {
 
-    }
-  };
+    console.log("Store Fetch Error:", error);
+
+  }
+};
 
   const filteredStores = stores
     .filter((store) =>
