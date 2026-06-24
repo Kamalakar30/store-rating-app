@@ -16,9 +16,10 @@ export const addStore = (req, res) => {
         return res.status(500).json(err);
       }
 
-      res.status(201).json({
-        message: "Store Added Successfully"
-      });
+     res.status(201).json({
+  message: "Store Added Successfully",
+  storeId: result.insertId
+});
 
     }
   );
