@@ -17,32 +17,42 @@ function OwnerDashboard() {
   }, []);
 
   const fetchRating = async () => {
-    try {
+  try {
 
-      const res = await axios.get(
-        "https://store-rating-app-lgts.onrender.com/api/ratings/store/1"
-      );
+    const storeId =
+      localStorage.getItem("storeId") || 1;
 
-      setRatingData(res.data);
+    const res = await axios.get(
+      `https://store-rating-app-lgts.onrender.com/api/ratings/store/${storeId}`
+    );
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    setRatingData(res.data);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+};
 
   const fetchUsers = async () => {
-    try {
+  try {
 
-      const res = await axios.get(
-        "https://store-rating-app-lgts.onrender.com/api/stores/1/users"
-      );
+    const storeId =
+      localStorage.getItem("storeId") || 1;
 
-      setUsers(res.data);
+    const res = await axios.get(
+      `https://store-rating-app-lgts.onrender.com/api/stores/${storeId}/users`
+    );
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    setUsers(res.data);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+};
 
   return (
     <>
@@ -55,8 +65,9 @@ function OwnerDashboard() {
         <div className="card p-4 mt-4">
 
           <h4>Store Name</h4>
-          <p>Bluemart</p>
-
+<p>
+  {localStorage.getItem("storeName") || "Store"}
+</p>
           <h4>Average Rating</h4>
 
           <h2>

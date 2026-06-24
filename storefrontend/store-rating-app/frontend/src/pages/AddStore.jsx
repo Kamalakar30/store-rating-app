@@ -26,14 +26,24 @@ function AddStore() {
         store
       );
 
-      alert(res.data.message);
+      localStorage.setItem(
+  "storeId",
+  res.data.storeId
+);
 
-      setStore({
-        name: "",
-        email: "",
-        address: "",
-        owner_id: ""
-      });
+localStorage.setItem(
+  "storeName",
+  store.name
+);
+
+alert(res.data.message);
+
+setStore({
+  name: "",
+  email: "",
+  address: "",
+  owner_id: ""
+});
 
     } catch (err) {
       console.log(err);
