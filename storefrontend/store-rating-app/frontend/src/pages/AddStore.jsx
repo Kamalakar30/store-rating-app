@@ -1,3 +1,4 @@
+
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
@@ -6,9 +7,10 @@ function AddStore() {
   const [store, setStore] = useState({
     name: "",
     email: "",
-    address: "",
-    owner_id: ""
+    address: ""
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setStore({
@@ -20,34 +22,41 @@ function AddStore() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!store.name.trim() || !store.email.trim() || !store.address.trim()) {
+      alert("Please fill in all fields");
+      return;
+    }
+
     try {
+      setLoading(true);
+
       const res = await axios.post(
         "https://store-rating-app-lgts.onrender.com/api/stores/add",
-        store
+        {
+          name: store.name.trim(),
+          email: store.email.trim(),
+          address: store.address.trim(),
+          owner_id: null
+        }
       );
 
-      localStorage.setItem(
-  "storeId",
-  res.data.storeId
-);
+      localStorage.setItem("storeId", res.data.storeId);
+      localStorage.setItem("storeName", store.name);
 
-localStorage.setItem(
-  "storeName",
-  store.name
-);
+      alert(res.data.message || "Store added successfully");
 
-alert(res.data.message);
-
-setStore({
-  name: "",
-  email: "",
-  address: "",
-  owner_id: ""
-});
-
+      setStore({
+        name: "",
+        email: "",
+        address: ""
+      });
     } catch (err) {
-      console.log(err);
-      alert("Failed to Add Store");
+      console.log(err.response?.data || err);
+      alert(
+        err.response?.data?.message || "Failed to add store. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,15 +65,10 @@ setStore({
       <Navbar />
 
       <div className="container mt-4">
-
         <div className="card p-4 shadow">
-
-          <h2 className="mb-4">
-            Add Store
-          </h2>
+          <h2 className="mb-4">Add Store</h2>
 
           <form onSubmit={handleSubmit}>
-
             <input
               type="text"
               name="name"
@@ -72,6 +76,7 @@ setStore({
               onChange={handleChange}
               className="form-control mb-3"
               placeholder="Store Name"
+              required
             />
 
             <input
@@ -81,6 +86,7 @@ setStore({
               onChange={handleChange}
               className="form-control mb-3"
               placeholder="Store Email"
+              required
             />
 
             <textarea
@@ -89,28 +95,18 @@ setStore({
               onChange={handleChange}
               className="form-control mb-3"
               placeholder="Store Address"
-            ></textarea>
-
-            <input
-              type="number"
-              name="owner_id"
-              value={store.owner_id}
-              onChange={handleChange}
-              className="form-control mb-3"
-              placeholder="Owner ID"
+              required
             />
 
             <button
               type="submit"
               className="btn btn-primary"
+              disabled={loading}
             >
-              Create Store
+              {loading ? "Adding Store..." : "Create Store"}
             </button>
-
           </form>
-
         </div>
-
       </div>
     </>
   );
